@@ -80,6 +80,13 @@ lines(density(EPI,na.rm=TRUE,bw=1)) # or bw = "SJ"
 rug(EPI)
 help(stem)
 
+plot(ecdf(EPI), do.points=FALSE, verticals=TRUE) 
+par(pty="s") 
+qqnorm(EPI); qqline(EPI)
+x <- seq(30,95,1)
+qqplot(qt(ppoints(250), df = 5), x, xlab = "Q-Q plot for t dsn")
+qqline(x)
+
 # for Agriculture
 AGRICULTURE
 tf <- is.na(AGRICULTURE)
@@ -93,6 +100,13 @@ hist(AGRICULTURE)
 hist(AGRICULTURE, seq(24.,100.,1.0),prob=TRUE)
 lines(density(AGRICULTURE,na.rm=TRUE,bw=1)) # or bw = "SJ"
 rug(AGRICULTURE)
+
+plot(ecdf(AGRICULTURE), do.points=FALSE, verticals=TRUE) 
+par(pty="s") 
+qqnorm(AGRICULTURE); qqline(AGRICULTURE)
+x <- seq(24,100,1)
+qqplot(qt(ppoints(250), df = 5), x, xlab = "Q-Q plot for t dsn")
+qqline(x)
 
 # for Climate
 CLIMATE
@@ -108,4 +122,42 @@ hist(CLIMATE, seq(9.,97.,1.0),prob=TRUE)
 lines(density(CLIMATE,na.rm=TRUE,bw=1)) # or bw = "SJ"
 rug(CLIMATE)
 
-help(stem)
+plot(ecdf(CLIMATE), do.points=FALSE, verticals=TRUE) 
+par(pty="s") 
+qqnorm(CLIMATE); qqline(CLIMATE)
+x <- seq(9,97,1)
+qqplot(qt(ppoints(250), df = 5), x, xlab = "Q-Q plot for t dsn")
+qqline(x)
+
+# Boxplot comparisons
+boxplot(EPI,AGRICULTURE) 
+boxplot(EPI,CLIMATE) 
+boxplot(AGRICULTURE,CLIMATE) 
+
+
+# Exercise #2
+EPILand<-EPI[!Landlock]
+ELand <- EPILand[!is.na(EPILand)]
+hist(ELand)
+hist(ELand, seq(30., 95., 1.0), prob=TRUE)
+
+EPINSW<-EPI[!No_surface_water]
+ENSW <- EPINSW[!is.na(EPINSW)]
+hist(ENSW)
+hist(ENSW, seq(30., 95., 1.0), prob=TRUE)
+
+EPIDes<-EPI[!Desert]
+EDes <- EPIDes[!is.na(EPIDes)]
+hist(EDes)
+hist(EDes, seq(30., 95., 1.0), prob=TRUE)
+
+EPIPop<-EPI[!High_Population_Density]
+EPop <- EPIPop[!is.na(EPIPop)]
+hist(EPop)
+hist(EPop, seq(30., 95., 1.0), prob=TRUE)
+
+EPI_South_Asia<-EPI[!GEO_subregion["South_Asia"]]
+E_S_Asia <- EPI_South_Asia[!is.na(EPI_South_Asia)]
+hist(E_S_Asia)
+hist(E_S_Asia, seq(30., 95., 1.0), prob=TRUE)
+
